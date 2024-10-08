@@ -49,17 +49,28 @@
             <!-- component -->
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="py-8">
-                    <div>
-                        <h2 class="text-2xl font-semibold leading-tight">Calls</h2>
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-semibold leading-tight">Calls
+
+                        </h2>
+                        <span v-if="ratingVisible"
+                              :class="[
+                                'font-semibold leading-tight border rounded-full py-1 px-2',
+                                ratingUpdate ? 'border-green-400 text-green-500' : '',
+                                isFading ? 'opacity-0 transition-opacity duration-2000' : 'opacity-100'
+                              ]">
+                            {{ ratingUpdate }}
+                        </span>
                     </div>
                     <div class="my-2 flex sm:flex-row flex-col">
                         <div class="flex flex-row mb-1 sm:mb-0">
                             <div class="relative">
                                 <select
-                                    class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                    <option>5</option>
-                                    <option>10</option>
-                                    <option>20</option>
+                                    v-model="selectNumber"
+                                    class="appearance-none  h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option :value="10">10</option>
+                                    <option :value="50">50</option>
+                                    <option :value="100">100</option>
                                 </select>
                                 <div
                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -69,11 +80,23 @@
                                 </div>
                             </div>
                             <div class="relative">
-                                <select
+                                <select v-model="selectYear"
                                     class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                                    <option>All</option>
-                                    <option>Active</option>
-                                    <option>Inactive</option>
+                                    <option :value="2024">2024</option>
+                                    <option :value="2023">2023</option>
+                                    <option :value="2022">2022</option>
+                                    <option :value="2021">2021</option>
+                                    <option :value="2020">2020</option>
+                                    <option :value="2019">2019</option>
+                                    <option :value="2018">2018</option>
+                                    <option :value="2017">2017</option>
+                                    <option :value="2016">2016</option>
+                                    <option :value="2015">2015</option>
+                                    <option :value="2014">2014</option>
+                                    <option :value="2013">2013</option>
+                                    <option :value="2012">2012</option>
+                                    <option :value="2011">2011</option>
+                                    <option :value="2010">2010</option>
                                 </select>
                                 <div
                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -84,13 +107,13 @@
                             </div>
                         </div>
                         <div class="block relative">
-                    <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                        <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
-                            <path
-                                d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                            </path>
-                        </svg>
-                    </span>
+                            <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
+                                <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
+                                    <path
+                                        d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+                                    </path>
+                                </svg>
+                            </span>
                             <input placeholder="Search"
                                    class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                         </div>
@@ -140,10 +163,6 @@
                                         class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                         Rating
                                     </th>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Action
-                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody >
@@ -186,33 +205,18 @@
                                     <td class="px-5 py-5 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">{{call.ended_at}}</p>
                                     </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
+                                    <td class="px-5 py-5 bg-white text-lg">
                                         <div class="flex items-center">
-                                            <template v-for="n in 5" :key="n">
-                                                <svg
-                                                    v-if="n <= call.rating.rating"
-                                                    class="w-5 h-5 text-yellow-500"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 20 20"
-                                                >
-                                                    <path d="M10 15l-5.146 3.039 1.377-5.855L.454 7.661l6.02-.488L10 1l3.526 5.173 6.02.488-5.777 4.523 1.377 5.855z" />
-                                                </svg>
-                                                <svg
-                                                    v-else
-                                                    class="w-5 h-5 text-gray-400"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 20 20"
-                                                >
-                                                    <path d="M10 15l-5.146 3.039 1.377-5.855L.454 7.661l6.02-.488L10 1l3.526 5.173 6.02.488-5.777 4.523 1.377 5.855z" />
-                                                </svg>
-                                            </template>
+                                            <span
+                                                v-for="star in [1, 2, 3, 4, 5]"
+                                                :key="star"
+                                                class="cursor-pointer"
+                                                :class="{ 'text-yellow-500': star <= call.rating.rating, 'text-gray-400': star > call.rating.rating }"
+                                                @click="updateRating(call, star)"
+                                            >
+                                                ★
+                                            </span>
                                         </div>
-                                    </td>
-
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">Edit</p>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -244,11 +248,16 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 
 const router = useRouter();
 const Calls = ref();
+const ratingUpdate = ref(null);
+const ratingVisible = ref(false);
+const isFading = ref(false);
+const selectNumber = ref(10);
+const selectYear = ref(2024);
 const token = localStorage.getItem('token');
 const logout = async () => {
     try {
@@ -270,18 +279,49 @@ const logout = async () => {
 
 const GetAllCalls = async () => {
     try {
-        const calls = await axios.get('/api/calls');
+        const calls = await axios.get(`/api/calls/${selectNumber.value}/${selectYear.value}`);
         Calls.value = calls.data.result;
-        console.log(calls.data.result)
+        console.log(selectNumber.value, selectYear.value, calls.data.result)
     } catch (error) {
         console.error("Failed to fetch messages:", error);
     }
 };
 
+const updateRating = async (call, newRating) => {
+    const oldRating = call.rating.rating;
+    call.rating.rating = newRating;
 
+    try {
+        const response = await axios.post(`/api/calls/${call.id}/rating`, { rating: newRating },{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        if (response.status ===200){
+            ratingUpdate.value = response.data.result;
+            ratingVisible.value = true;
+            isFading.value = false;
+            setTimeout(()=>{
+                isFading.value = true;
+                setTimeout(()=>{
+                    ratingVisible.value = false;
+                },4000)
+            },2000)
+        }
+        console.log(`${response.data.result} Call ID ${call.id}: ${newRating}`);
+    } catch (error) {
+        console.error('Error updating rating:', error);
+        call.rating.rating = oldRating;
+    }
+};
 
 onMounted(()=>{
     GetAllCalls();
 })
-
+watch(
+    [selectNumber, selectYear],
+    ([newSelectNumber, newSelectYear]) => {
+        GetAllCalls(newSelectNumber, newSelectYear);
+    }
+);
 </script>
