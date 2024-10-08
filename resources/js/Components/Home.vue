@@ -15,40 +15,7 @@
                         <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Call Analysis</span>
                     </a>
                 </div>
-<!--                <div class="flex items-center">-->
-<!--                    <div class="flex items-center ms-3">-->
-<!--                        <div>-->
-<!--                            <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">-->
-<!--                                <span class="sr-only">Open user menu</span>-->
-<!--                                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">-->
-<!--                            <div class="px-4 py-3" role="none">-->
-<!--                                <p class="text-sm text-gray-900 dark:text-white" role="none">-->
-<!--                                    Neil Sims-->
-<!--                                </p>-->
-<!--                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">-->
-<!--                                    neil.sims@flowbite.com-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                            <ul class="py-1" role="none">-->
-<!--                                <li>-->
-<!--                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+
             </div>
         </div>
     </nav>
@@ -171,10 +138,6 @@
                                     </th>
                                     <th
                                         class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Date
-                                    </th>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                         Rating
                                     </th>
                                     <th
@@ -183,57 +146,71 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
+                                <tbody >
+                                <tr v-for="call in Calls"
+                                    :key="call.id">
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.id}}</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{ call.agent.name }}</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.user.name}}</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.title}}</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <span
+                                            :class="{
+                                                'relative inline-block px-3 py-1 font-semibold leading-tight': true,
+                                                'text-blue-900 bg-blue-200': call.status === 'pending',
+                                                'text-yellow-900 bg-yellow-200': call.status === 'in_progress',
+                                                'text-green-900 bg-green-200': call.status === 'completed',
+                                                'text-red-900 bg-red-200': call.status === 'cancelled'
+                                            }">
+                                            <span aria-hidden class="absolute inset-0 opacity-50 rounded-full"></span>
+                                            <span class="relative">{{ call.status }}</span>
+                                        </span>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.type}}</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.duration}} min</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.started_at}}</p>
+                                    </td>
+                                    <td class="px-5 py-5 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{call.ended_at}}</p>
+                                    </td>
                                     <td class="px-5 py-5 bg-white text-sm">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 w-10 h-10">
-                                                <img class="w-full h-full rounded-full"
-                                                     src="https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80"
-                                                     alt="" />
-                                            </div>
-                                            <div class="ml-3">
-                                                <p class="text-gray-900 whitespace-no-wrap">
-                                                    Alonzo Cox
-                                                </p>
-                                            </div>
+                                            <template v-for="n in 5" :key="n">
+                                                <svg
+                                                    v-if="n <= call.rating.rating"
+                                                    class="w-5 h-5 text-yellow-500"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path d="M10 15l-5.146 3.039 1.377-5.855L.454 7.661l6.02-.488L10 1l3.526 5.173 6.02.488-5.777 4.523 1.377 5.855z" />
+                                                </svg>
+                                                <svg
+                                                    v-else
+                                                    class="w-5 h-5 text-gray-400"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path d="M10 15l-5.146 3.039 1.377-5.855L.454 7.661l6.02-.488L10 1l3.526 5.173 6.02.488-5.777 4.523 1.377 5.855z" />
+                                                </svg>
+                                            </template>
                                         </div>
                                     </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">Jan 18, 2020</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">Title</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                    <span
-                                        class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                        <span aria-hidden
-                                              class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Inactive</span>
-                                    </span>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">inbound</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">4 min</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">6:23AM</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">6:27AM</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">Raing</p>
-                                    </td>
-                                    <td class="px-5 py-5 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">2023 </p>
-                                    </td>
+
                                     <td class="px-5 py-5 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">Edit</p>
                                     </td>
@@ -267,12 +244,15 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import {onMounted, ref} from "vue";
+import axios from "axios";
 
 const router = useRouter();
-
+const Calls = ref();
+const token = localStorage.getItem('token');
 const logout = async () => {
     try {
-        const token = localStorage.getItem('token');
+
         await axios.post('/api/logout', {}, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -286,5 +266,22 @@ const logout = async () => {
         console.error('Logout failed:', err);
     }
 };
+
+
+const GetAllCalls = async () => {
+    try {
+        const calls = await axios.get('/api/calls');
+        Calls.value = calls.data.result;
+        console.log(calls.data.result)
+    } catch (error) {
+        console.error("Failed to fetch messages:", error);
+    }
+};
+
+
+
+onMounted(()=>{
+    GetAllCalls();
+})
 
 </script>

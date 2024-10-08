@@ -12,8 +12,9 @@ class Ratings extends Model
 
     public function call()
     {
-        return $this->belongsTo(calls::class);
+        return $this->belongsTo(Calls::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);

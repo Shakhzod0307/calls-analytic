@@ -18,14 +18,14 @@ class RatingsFactory extends Factory
      * @return array<string, mixed>
      */
     protected $model = Ratings::class;
-
+    private static int $call_id = 0;
     public function definition()
     {
         $admin = User::where('role', 'admin')->first();
-
+        self::$call_id++;
         return [
             'user_id' => $admin,
-            'call_id' => Calls::factory(),
+            'call_id' => self::$call_id,
             'rating' => rand(1, 5),
         ];
     }

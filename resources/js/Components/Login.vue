@@ -75,7 +75,7 @@ const LoginSubmit = async () => {
             return;
         }
         if (token) {
-            const expiresIn = 36000;
+            const expiresIn = 3600000;
             const expirationTime = new Date().getTime() + expiresIn;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));

@@ -47,12 +47,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function calls()
+    public function callsAsUser()
     {
-        return $this->hasMany(calls::class);
+        return $this->hasMany(Calls::class, 'user_id');
     }
+
+    public function callsAsAgent()
+    {
+        return $this->hasMany(Calls::class, 'agent_id');
+    }
+
     public function ratings()
     {
-        return $this->hasMany(ratings::class);
+        return $this->hasMany(Ratings::class, 'user_id');
     }
 }
