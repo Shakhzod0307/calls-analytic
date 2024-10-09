@@ -23,6 +23,6 @@ class Calls extends Model
 
     public function rating():HasOne
     {
-        return $this->hasOne(Ratings::class, 'call_id');
+        return $this->hasOne(Ratings::class, 'call_id','id');
     }
 }
