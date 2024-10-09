@@ -24,7 +24,7 @@
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 font-medium">
                 <li>
-                    <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <a href="#"  @click.prevent="$router.push('/')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                             <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                             <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
@@ -63,25 +63,19 @@
                         </span>
                     </div>
                     <div class="my-2 flex sm:flex-row flex-col">
-                        <div class="flex flex-row mb-1 sm:mb-0">
+                        <div class="flex flex-row mb-1 sm:mb-0 gap-1">
                             <div class="relative">
                                 <select
                                     v-model="selectNumber"
-                                    class="appearance-none  h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    class="appearance-none  h-full rounded-l border block appearance-none  bg-white border-gray-400 text-gray-700 py-2 px-8 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option :value="10">10</option>
                                     <option :value="50">50</option>
                                     <option :value="100">100</option>
                                 </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                    </svg>
-                                </div>
                             </div>
                             <div class="relative">
                                 <select v-model="selectYear"
-                                    class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                                    class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
                                     <option :value="0">Year</option>
                                     <option :value="2024">2024</option>
                                     <option :value="2023">2023</option>
@@ -99,17 +93,12 @@
                                     <option :value="2011">2011</option>
                                     <option :value="2010">2010</option>
                                 </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                    </svg>
-                                </div>
+
                             </div>
                             <div class="relative">
                                 <select
                                     v-model="selectMonth"
-                                    class="appearance-none  h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    class="appearance-none  h-full rounded-l border block appearance-none bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option :value="0" >Month</option>
                                     <option :value="1">January</option>
                                     <option :value="2">February</option>
@@ -119,17 +108,13 @@
                                     <option :value="6">June</option>
                                     <option :value="7">July</option>
                                     <option :value="8">August</option>
+                                    <option :value="8">August</option>
                                     <option :value="9">September</option>
                                     <option :value="10">October</option>
                                     <option :value="11">November</option>
                                     <option :value="12">December</option>
                                 </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                    </svg>
-                                </div>
+
                             </div>
 
                             <div class="relative">
@@ -152,37 +137,13 @@
                                 </div>
                             </div>
 
-
-                            <div class="relative max-w-sm">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                    </svg>
-                                </div>
-                                <input v-model="dateStart" datepicker datepicker-autohide type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                            <vue-tailwind-datepicker
+                                v-model="dateStart"
+                                placeholder="Select Dates"
+                                separator=" to "
+                                :shortcuts="false"
+                            />
                             </div>
-                             <div id="second" class="relative max-w-sm">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                    </svg>
-                                </div>
-                                <input v-model="dateEnd"  id="datepicker-autohide" datepicker datepicker-autohide type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
-                            </div>
-                            <button @click="GetAllCallsByDates"  class="border-black-500 rounded bg-gray-200 px-5">Get</button>
-
-                            </div>
-                        <div class="block relative">
-                            <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                                <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
-                                    <path
-                                        d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                                    </path>
-                                </svg>
-                            </span>
-                            <input placeholder="Search"
-                                   class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-                        </div>
                     </div>
                     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -287,22 +248,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div
-                                class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-                        <span class="text-xs xs:text-sm text-gray-900">
-                            Showing 1 to 4 of 50 Entries
-                        </span>
-                                <div class="inline-flex mt-2 xs:mt-0">
-                                    <button
-                                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
-                                        Prev
-                                    </button>
-                                    <button
-                                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
-                                        Next
-                                    </button>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -316,7 +262,7 @@
 import { useRouter } from 'vue-router';
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
-import {initFlowbite} from "flowbite";
+import VueTailwindDatepicker from "vue-tailwind-datepicker";
 
 const router = useRouter();
 const Calls = ref();
@@ -326,15 +272,21 @@ const isFading = ref(false);
 const selectNumber = ref(10);
 const selectYear = ref(0);
 const selectMonth = ref(0);// 1-12
-const selectWeek = ref(null);
-
 const selectedDay = ref(0);
-const isDropdownOpen = ref(false);;
+const isDropdownOpen = ref(false);
 const days = [0 ,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
 
-// const days = Array.from({ length: 31 }, (_, i) => i + 1);
-const dateStart = ref('');
-const dateEnd = ref('');
+const dateStart = ref({
+    StartDate:'',
+    EndDate:'',
+});
+const formatter = ref({
+    date: 'DD',
+    month: 'MMM',
+    year: 'YYY',
+});
+
+
 const token = localStorage.getItem('token');
 const logout = async () => {
     try {
@@ -352,40 +304,43 @@ const logout = async () => {
         console.error('Logout failed:', err);
     }
 };
-
 function toggleDropdown() {
     isDropdownOpen.value = !isDropdownOpen.value;
 }
-
 function selectDay(day) {
     selectedDay.value = day;
     isDropdownOpen.value = false;
 }
 const GetAllCalls = async () => {
     try {
-        const calls = await axios.get(`/api/calls/${selectNumber.value}/${selectYear.value}/${selectMonth.value}/${selectedDay.value}${dateStart.value}${dateEnd.value}`);
+        const calls = await axios.get(`/api/calls/${selectNumber.value}/${selectYear.value}/${selectMonth.value}/${selectedDay.value}`);
         Calls.value = calls.data.result;
-        console.log(selectYear.value, calls.data.result);
+        // console.log(selectYear.value, calls.data.result);
     } catch (error) {
         console.error("Failed to fetch messages:", error);
     }
 };
-
 const GetAllCallsByDates = async () => {
+    const formatDate = (datetime) => {
+        return datetime.split(' ')[0]
+    }
     try {
-        if (!dateStart.value || !dateEnd.value) {
+        if (!dateStart.value) {
             console.error("Please select both start and end dates.");
             return;
         }
+        const formattedStartDate = formatDate(dateStart.value.StartDate)
+        const formattedEndDate = formatDate(dateStart.value.EndDate)
         const calls = await axios.get(`/api/callsByDate`, {
             params: {
                 selectNumber: selectNumber.value,
-                dateStart: dateStart.value,
-                dateEnd: dateEnd.value,
+                dateStart:formattedStartDate,
+                dateEnd:formattedEndDate,
             },
         });
         Calls.value = calls.data.result;
-        console.log(selectNumber.value, dateStart.value, dateEnd.value, calls.data.result);
+        // console.log(selectNumber.value, formattedStartDate,formattedEndDate);
+
     } catch (error) {
         console.error("Failed to fetch messages:", error);
     }
@@ -412,7 +367,7 @@ const updateRating = async (call, newRating) => {
                 },4000)
             },2000)
         }
-        console.log(`${response.data.result} Call ID ${call.id}: ${newRating}`);
+        // console.log(`${response.data.result} Call ID ${call.id}: ${newRating}`);
     } catch (error) {
         console.error('Error updating rating:', error);
         call.rating.rating = oldRating;
@@ -424,12 +379,12 @@ onMounted(()=>{
     // GetAllCallsByDates();
 })
 watch(
-    [selectNumber, selectYear,selectMonth,selectWeek,selectedDay,dateStart,dateEnd],
-    ([newSelectNumber, newSelectYear,newSelectMonth,newSelectWeek,newSelectedDay,newDateStart,newDateEnd]) => {
-        if (newDateStart && newDateEnd) {
-            GetAllCallsByDates(newSelectNumber,newDateStart, newDateEnd);
+    [selectNumber, selectYear,selectMonth,selectedDay,dateStart],
+    ([newSelectNumber, newSelectYear,newSelectMonth,newSelectedDay,newDateStart]) => {
+        if (newSelectNumber && newSelectYear || newSelectMonth || newSelectedDay) {
+            GetAllCalls(newSelectNumber, newSelectYear,newSelectMonth,newSelectedDay);
         }else {
-            GetAllCalls(newSelectNumber, newSelectYear,newSelectMonth,newSelectWeek,newSelectedDay);
+            GetAllCallsByDates(newSelectNumber,newDateStart);
         }
     }
 );
