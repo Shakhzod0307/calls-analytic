@@ -381,7 +381,7 @@ onMounted(()=>{
 watch(
     [selectNumber, selectYear,selectMonth,selectedDay,dateStart],
     ([newSelectNumber, newSelectYear,newSelectMonth,newSelectedDay,newDateStart]) => {
-        if (newSelectNumber && newSelectYear || newSelectMonth || newSelectedDay) {
+        if (newSelectNumber || newSelectYear || newSelectMonth || newSelectedDay) {
             GetAllCalls(newSelectNumber, newSelectYear,newSelectMonth,newSelectedDay);
         }else {
             GetAllCallsByDates(newSelectNumber,newDateStart);
